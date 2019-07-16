@@ -1,0 +1,42 @@
+@import "./colors";
+//font color
+.fz-cl-main {
+  color: $main-color;
+}
+
+.fz-cl-light {
+  color: $cl-gray-light;
+}
+
+.fz-cl-white {
+  color: $cl-white;
+}
+
+//布局
+.layout {
+  height: 100%;
+}
+
+.ctx-w {
+  min-width: 860px;
+}
+
+.main {
+  .container{
+    height: 100%;
+    background-color: #fff;
+    .set-title {
+      padding: 30px;
+      font-weight: bold;
+      border-bottom: 1px solid #efefef;
+    }
+    .set-content {
+      padding: 20px 30px;
+      flex: 1;
+      box-sizing: border-box;
+    }
+  }
+
+}
+
+
