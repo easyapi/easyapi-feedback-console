@@ -1,7 +1,7 @@
-# EasyAPI短信服务控制台 [http://sms.easyapi.com](http://sms.easyapi.com)
+# EasyAPI意见反馈控制台 
 
 ## 项目介绍
-本模块主要是EasyAPI短信服务，包括短信模板，发送记录，发送短信，短信收件箱等功能。
+意见反馈
 
 ## 相关技术和第三方库
 
@@ -9,7 +9,7 @@
 * [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 * [vuex中文文档](https://vuex.vuejs.org/zh-cn/)
 * [vue-router2中文文档](https://router.vuejs.org/zh-cn/)
-* [iview组件库](https://www.iviewui.com/)
+* [Element-ui组件库](https://element.eleme.cn/)
 * [vue-cli脚手架](https://github.com/vuejs/vue-cli)
 
 ---
@@ -34,37 +34,32 @@ npm run build --report
 
 ``` bash
 ├── README.md
-├── build                   #webpack配置
-├── config                  #Webpack配置
 ├── dist                    #打包后输出文件夹
-├── index.html              #入口
+├── public          
+  ├── imgages               #图片     
+  ├── index.html               #入口      
 ├── node_modules            #依赖模块
 ├── package.json
-├── src                     #源码
-  ├── App.vue              
+├── src                     #源码          
+  ├── api
+  │   ├── api.js            #API列表
+  │   └── fetch.js          #axios封装
   ├── assets                #静态资源
-  │   ├── icons             #自定义图标
+  │     ├── font             #css
+  │   ├── font             #字体
   │   ├── images            #图片
   │   └── styles            #样式表
   ├── components            #业务组件
-  │   ├── BreadCrumb.vue    #面包屑
-  │   ├── Footer.vue        #footer组件
-  │   ├── Head.vue          #head组件
-  │   └── VerticalMenu.vue  #左侧竖型组件
-  ├── libs                  #依赖工具函数
-  ├── locale                #多语言文件
-  ├── main.js              
+  │   ├── Header.vue        #Header组件
+  │   └── Aside.vue     #Aside组件
   ├── pages                 #页面文件
-  │   ├── OutLayout.vue     #最外层模板
-  │   ├── api               #API接口编辑模块页面
-  │   └── struct            #数据结构模块页面
   ├── router                #路由配置
-  ├── api
-  │   ├── api.js            #API列表
-  │   └── fetch.js          #Ajax封装
-  └── store                 #Vuex配置
-└── static                  #静态资源文件
-  └── images                #图片
+  ├── store                 #Vuex配置
+  ├── utils                  #依赖工具函数
+  ├── App.vue               
+  └── main.js               #入口
+
+
 
 ```
 
