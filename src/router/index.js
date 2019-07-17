@@ -23,6 +23,11 @@ export default new Router({
           component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/list.vue')
         },
         {
+          path: 'detail',
+          name: 'FeedbackList',
+          component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/detail.vue')
+        },
+        {
           path: 'template',
           name: 'FeedbackTemplate',
           component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/template.vue')

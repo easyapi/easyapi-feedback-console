@@ -24,6 +24,7 @@
 .main {
   .container{
     height: 100%;
+    overflow-y: auto;
     background-color: #fff;
     .set-title {
       padding: 30px;
@@ -38,5 +39,8 @@
   }
 
 }
-
+//分页
+.pagination {
+  padding: 24px 0;
+}
 
