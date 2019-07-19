@@ -7,11 +7,11 @@
 					<i class="icon-eye"></i>
 					<span>意见反馈列表</span>
 				</li>
-				<li @click="changeRoute('/feedback/template', $event)" :class="['nav-item', {'active':module=='FeedbackTemplate'}]">
-					<i class="icon-eye"></i>
-					<span>回复模板</span>
-				</li>
-				<li @click="changeRoute('/feedback/setting', $event)" :class="['nav-item', {'active':module=='FeedbackSetting'}]">
+				<!--<li @click="changeRoute('/feedback/template', $event)" :class="['nav-item', {'active':module=='FeedbackTemplate'}]">-->
+					<!--<i class="icon-eye"></i>-->
+					<!--<span>回复模板</span>-->
+				<!--</li>-->
+				<li @click="changeRoute('/feedback/setting-list', $event)" :class="['nav-item', {'active':module=='FeedbackSettingList'}]">
 					<i class="icon-eye"></i>
 					<span>反馈配置</span>
 				</li>

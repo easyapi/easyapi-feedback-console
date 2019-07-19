@@ -33,8 +33,13 @@ export default new Router({
           component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/template.vue')
         },
         {
+          path: 'setting-list',
+          name: 'FeedbackSettingList',
+          component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/setting-list.vue')
+        },
+        {
           path: 'setting',
-          name: 'FeedbackSetting',
+          name: 'FeedbackSettingList',
           component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/setting.vue')
         },
       ]

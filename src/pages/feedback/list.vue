@@ -13,39 +13,38 @@
 					width="50">
 				</el-table-column>
 				<el-table-column
-					prop="date"
+					prop="addTime"
 					label="反馈时间"
 					width="180"
 					align="center">
 				</el-table-column>
 				<el-table-column
-					prop="name"
+					prop="linkman"
 					label="姓名"
 					width="180"
 					align="center">
 				</el-table-column>
 				<el-table-column
-					prop="name"
+					prop="contact"
 					label="联系方式"
 					width="180"
 					align="center">
 				</el-table-column>
 				<el-table-column
-					prop="address"
+					prop="content"
 					label="反馈内容"
 					header-align="center">
 				</el-table-column>
 				<el-table-column
-					prop="name"
+
 					label="状态"
 					width="180"
 					align="center">
-				</el-table-column>
-				<el-table-column
-					prop="name"
-					label="操作人"
-					width="180"
-					align="center">
+					<template v-slot="scope">
+						<div v-if="scope.row.ifReply">已回复</div>
+						<div class="cl-red">未回复</div>
+
+					</template>
 				</el-table-column>
 				<el-table-column
 					prop="name"
@@ -53,8 +52,9 @@
 					width="180"
 					align="center">
 					<template v-slot="scope">
-						<el-button size="mini" @click="jumpPage('/feedback/detail',1)" type="primary">详情</el-button>
-						<el-button size="mini" @click="delFeedback(1)" type="danger">删除</el-button>
+						<el-button size="mini" @click="jumpPage('/feedback/detail',scope.row.feedbackId)" type="primary">详情
+						</el-button>
+						<el-button size="mini" @click="delFeedback(scope.row.feedbackId)" type="danger">删除</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -74,40 +74,15 @@
 	</div>
 </template>
 <script>
+  import {feedbacksUrl, feedbackUrl} from '../../api/api'
+
   export default {
     name: '',
     components: {},
     props: {},
     data() {
       return {
-        tableData: [
-
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }],
+        tableData: [],
         loading: false,
         current: 1,
         pageSize: 15,
@@ -133,45 +108,45 @@
     methods: {
       getFeedbackList() {
         this.loading = true;
-        // let obj = {}
-        // obj.page = this.current - 1;
-        // obj.size = this.pageSize;
-        // obj.username = this.formInline.username;
-        // obj.nickname = this.formInline.nickname;
-        // this.$ajax({
-        //   method: "get",
-        //   url: usersUrl,
-        //   params: obj
-        // }).then(res => {
-        //   console.log(res)
-        //   if (res.data.code === 0) {
-        //     this.tableData = [];
-        //     this.total = 0;
-        //   } else {
-        //     this.tableData = res.data.content;
-        //     this.total = res.data.totalElements;
-        //   }
-        this.loading = false;
-        // }).catch(error => {
-        //   console.log(error);
-        // });
+        let obj = {}
+        obj.page = this.current - 1;
+        obj.size = this.pageSize;
+
+        this.$ajax({
+          method: "get",
+          url: feedbacksUrl,
+          params: obj
+        }).then(res => {
+          console.log(res)
+          if (res.data.code === 0) {
+            this.tableData = [];
+            this.total = 0;
+          } else {
+            this.tableData = res.data.content;
+            this.total = res.data.totalElements;
+          }
+          this.loading = false;
+        }).catch(error => {
+          console.log(error);
+        });
       },
       delFeedback(e) {
         this.$confirm('您确定要删除该反馈内容吗？')
           .then(_ => {
-            // this.$ajax({
-            //   method: 'delete',
-            //   url: userUrl + '/' + e,
-            // }).then(res => {
-            //   console.log(res)
-            //   if (res.data.code === 1) {
-                this.$message.success("删除成功");
-            //     this.getFeedbackList();
-            //   }
-						//
-            // }).catch(error => {
-            //   console.log(error.response)
-            // });
+            this.$ajax({
+              method: 'delete',
+              url: feedbackUrl + '/' + e,
+            }).then(res => {
+              console.log(res)
+              this.$message.success(res.data.message);
+              if (res.data.code === 1) {
+
+                this.getFeedbackList();
+              }
+
+            }).catch(error => {
+              console.log(error.response)
+            });
           })
           .catch(_ => {
           });
@@ -192,6 +167,8 @@
     }
   }
 </script>
-<style scoped lang="stylus">
-
+<style scoped lang="scss">
+	.cl-red {
+		color: #e4393c;
+	}
 </style>
