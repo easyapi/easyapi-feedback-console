@@ -43,7 +43,7 @@ const team = {
       }).then(res=>{
         console.log(res)
         if (res.data.code===1){
-          dispatch('GetUserInfo')
+          dispatch('getUserInfo')
         }
       }).catch(error =>{
         console.log(error)

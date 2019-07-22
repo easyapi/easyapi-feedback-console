@@ -7,7 +7,11 @@ const getters = {
   teamImg: state => state.user.teamImg,
   userTeam: state => state.user.userTeam,
   token: state => state.user.token,
-
   teamList: state => state.team.teamList,
+
+  pagesList: state => state.pages.pagesList,
+  navBarActive: state => state.pages.navBarActive,
+  sons: state => state.pages.sons,
+  sonsBarActive: state => state.pages.sonsBarActive,
 }
 export default getters

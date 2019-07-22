@@ -1,7 +1,12 @@
 <template>
-	<div class="container flex-c">
-		<h2 class="set-title">反馈详情</h2>
-		<div class="set-content">
+	<div class="main-container">
+		<div class="main-breadcrumb flex-r">
+			<el-breadcrumb separator-class="el-icon-arrow-right">
+				<el-breadcrumb-item to="/feedback/list">意见反馈列表</el-breadcrumb-item>
+				<el-breadcrumb-item>意见反馈详情</el-breadcrumb-item>
+			</el-breadcrumb>
+		</div>
+		<div class="main-content">
 			<el-form label-width="100px">
 				<el-form-item label="姓名">
 					<span>{{feedbackDetail.linkman}}</span>
@@ -16,7 +21,7 @@
 					<div class="feedback-content">
 						<p>{{feedbackDetail.content}}
 
-							</p>
+						</p>
 					</div>
 					<div class="feedback-imgs" v-if="incisionImgs(feedbackDetail.imgs).length>0">
 						<img v-for="(item,index) in incisionImgs(feedbackDetail.imgs)" :key="index" :src="item" alt="暂无图片" >
@@ -32,23 +37,23 @@
 						v-model="reply">
 					</el-input>
 					<!--<div>-->
-						<!--<el-popover-->
-							<!--placement="top-start"-->
-							<!--width="400"-->
-							<!--trigger="click" popper-class="feedback-popover">-->
-							<!--<div class="list">-->
-								<!--<div class="list-item">-->
-									<!--回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1-->
-								<!--</div>-->
-								<!--<div class="list-item">-->
-									<!--回复1回复1回复1回复1回复1回复1回复1回复1回复1-->
-								<!--</div>-->
-								<!--<div class="list-item">-->
-									<!--回复1回复1回复1回复1回复1回复1回复1回复1回复1-->
-								<!--</div>-->
-							<!--</div>-->
-							<!--<el-button size="small" plain slot="reference">常用语</el-button>-->
-						<!--</el-popover>-->
+					<!--<el-popover-->
+					<!--placement="top-start"-->
+					<!--width="400"-->
+					<!--trigger="click" popper-class="feedback-popover">-->
+					<!--<div class="list">-->
+					<!--<div class="list-item">-->
+					<!--回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1回复1-->
+					<!--</div>-->
+					<!--<div class="list-item">-->
+					<!--回复1回复1回复1回复1回复1回复1回复1回复1回复1-->
+					<!--</div>-->
+					<!--<div class="list-item">-->
+					<!--回复1回复1回复1回复1回复1回复1回复1回复1回复1-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--<el-button size="small" plain slot="reference">常用语</el-button>-->
+					<!--</el-popover>-->
 					<!--</div>-->
 				</el-form-item>
 				<el-form-item>

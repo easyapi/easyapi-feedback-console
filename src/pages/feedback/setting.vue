@@ -1,7 +1,12 @@
 <template>
-	<div class="container flex-c">
-		<h2 class="set-title">{{title}}</h2>
-		<div class="set-content">
+	<div class="main-container">
+		<div class="main-breadcrumb flex-r">
+			<el-breadcrumb separator-class="el-icon-arrow-right">
+				<el-breadcrumb-item to="/feedback/setting-list">意见反馈设置</el-breadcrumb-item>
+				<el-breadcrumb-item>{{title}}</el-breadcrumb-item>
+			</el-breadcrumb>
+		</div>
+		<div class="main-content">
 			<el-form label-width="100px">
 				<el-form-item label="邮箱">
 					<el-input
@@ -51,7 +56,7 @@
     data() {
       return {
         type: 1,
-        title: '新增配置',
+        title: '新增意见配置',
         feedbackConfigId: '',
 
         emails: "",
@@ -68,9 +73,9 @@
     mounted() {
       this.type = Number(this.$route.query.type)
       if (this.type === 1) {
-        this.title = '新增配置';
+        this.title = '新增意见配置';
       } else {
-        this.title = '编辑配置';
+        this.title = '编辑意见配置';
         this.feedbackConfigId = this.$route.query.val
         this.getFeedbackConfigDetail()
       }

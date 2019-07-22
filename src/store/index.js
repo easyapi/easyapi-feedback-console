@@ -3,13 +3,15 @@ import Vuex from 'vuex'
 import user from './modules/user'
 import team from './modules/team'
 import getters from './getters'
+import pages from './modules/pages'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
     user,
-    team
+    team,
+    pages
   },
   //定义状态
   state: {

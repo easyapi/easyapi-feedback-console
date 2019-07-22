@@ -10,11 +10,10 @@
 <script>
   import Header from '../../components/Header'
   import Aside from '../../components/Aside'
-
   export default {
     name: 'LayOut',
     components: {
-      Header, Aside
+      Header,Aside
     },
     props: {},
     data() {
@@ -40,14 +39,14 @@
   }
 </script>
 <style scoped lang="scss">
-	.main {
-		position: absolute;
-		top: 50px;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		overflow: auto;
-		margin-left: 240px;
+	.el-main {
+		background-color: $cl-gray;
+		height: 100%;
 	}
+
+	.el-container {
+		height: 100%;
+	}
+
 
 </style>

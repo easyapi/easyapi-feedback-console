@@ -59,7 +59,7 @@ const user = {
 
     },
     // 获取用户信息
-    GetUserInfo({commit, state}) {
+    getUserInfo({commit, state}) {
       axios({
         method: 'get',
         url: getAccountInfo,
@@ -83,7 +83,7 @@ const user = {
 
     },
     // 登出
-    LogOut({commit, state}) {
+    logOut({commit, state}) {
       Cookies.remove('authenticationToken');
     },
   }

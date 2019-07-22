@@ -1,19 +1,23 @@
 <template>
-	<div class="header ctx-w clear">
-		<div class="fl easyapi-logo clear">
-			<a href="https://www.easyapi.com/" class="logo fl">
-				<img src="../../public/images/logo.png" alt="" class="logo-img">
-			</a>
-			<a href="https://market2.easyapi.com/service/center" class="a-item">服务中心</a>
+	<div class="header flex-r">
+		<div class="header_logo flex-r">
+			<img src="../assets/images/logo.png" alt="">
+			<span class="fz-14">
+				意见反馈
+			</span>
 		</div>
-		<div class="fr userOperation-box">
-			<div class="teamServe">
-				<a id="showSerInfo" :class="{active:showSerInfo}">
-					<span class="teamIcon"></span>
-				</a>
-				<div :class="{active:showSerInfo}" class="teamServeInfo">
-					<h2 class="teamServeName lr-pd-20">当前团队</h2>
-					<div class="clear teamServeContent lr-pd-20">
+		<div class="header_navbar flex-r">
+			<a v-for="(item,index) in pagesList" :class="[navBarActive===item.name?'active':'']" :key="index"
+			   @click="jumpPage(item.url)">{{item.title}}</a>
+		</div>
+		<div class="header_account flex-r">
+			<el-popover
+				placement="bottom-end"
+				trigger="click"
+				visible-arrow width="460">
+				<div class="teamServeInfo">
+					<h2 class="teamServeName lrPading-20">当前团队</h2>
+					<div class="clear teamServeContent lrPading-20">
 						<img class="lf teamsServeImg" :src='teamImg+"!icon.jpg"' alt="">
 						<div class="lf teamsServeImg-R">
 							<p>{{teamName}}</p>
@@ -25,9 +29,9 @@
 						</div>
 					</div>
 					<div class="switchTeam-box">
-						<h2 class="lr-pd-20">切换团队：</h2>
-						<div class="ea-TeamList-box lr-pd-20">
-							<a class="ea-Team-item flex-r" v-for="(item,index) in teamList" v-bind:key="index"
+						<h2 class="lrPading-20">切换团队：</h2>
+						<div class="ea-TeamList-box lrPading-20">
+							<a class="ea-Team-item" v-for="(item,index) in teamList" v-bind:key="index"
 							   @click="tabTeamFn(item.team.teamId)">
 								<img :src="item.team.img+'!icon.jpg'" alt="">
 								<span>{{item.team.name}}</span>
@@ -36,277 +40,130 @@
 						</div>
 					</div>
 					<div class="creatTeam">
-						<el-button type="primary" size="small" @click="jupmPage()">创建新团队</el-button>
+						<el-button size="small" @click="createTeamPage" type="primary">创建新团队
+						</el-button>
+
 					</div>
 				</div>
-			</div>
-			<div class="userAvatar ea-Dropdown">
-				<a>
-					<img id="showPersonage" :src="photo" alt="">
+				<a slot="reference" style="display: inline-block;margin-right: 20px">
+					<!--<span class="teamIcon"></span>-->
+					<img src="../../public/images/teamIcon.png" alt="">
 				</a>
-				<div :class="{active:isActive}" class="ea-DropdownMenu">
+			</el-popover>
+
+
+			<el-popover
+				v-model="showPopover"
+				popper-class="el-popover--box"
+				placement="bottom-end"
+				visible-arrow
+				width="50"
+				trigger="click">
+				<div class="flex-c">
 					<a href="https://account.easyapi.com/notification/">我的通知</a>
 					<a href="https://account.easyapi.com/setting/data">个人设置</a>
-					<a @click="quitLogin()" href="https://account.easyapi.com/logout">退出</a>
+					<a @click="logOut">退出</a>
 				</div>
-			</div>
+				<a slot="reference">
+					<img :src="photo" alt="">
+				</a>
+			</el-popover>
+
 		</div>
 	</div>
-</template>
 
+</template>
 <script>
   import {mapGetters} from 'vuex'
 
   export default {
-    name: 'Header',
-    data: function () {
+    name: "Header",
+    components: {},
+    props: {},
+    data() {
       return {
-        inBack: false,
-        searchServe: '',
-        serveName: '',
-        userInfo: [],
-        isActive: false,
-        showSerInfo: false,
+        showPopover: false
       }
     },
+    //计算属性
     computed: {
       ...mapGetters([
         'photo',
         'team',
         'teamName',
         'teamImg',
-        'teamList'
+        'teamList',
+        'pagesList',
+        'navBarActive'
       ])
     },
-    created: function () {
-      if (this.$route.path.indexOf('/back/') < 0) {
-        this.inBack = false
-      } else {
-        this.inBack = true
-      }
-      let body = document.querySelector('body');
-      body.addEventListener('click', (e) => {
-        if (e.target.id === 'showSerInfo' || e.target.className === 'teamIcon') {
-          this.isActive = false;
-          this.showSerInfo = !this.showSerInfo
-        } else if (e.target.id === 'showPersonage') {
-          this.isActive = !this.isActive;
-          this.showSerInfo = false;
-        } else {
-          this.showSerInfo = false;
-          this.isActive = false;
-        }
-      }, false)
-    },
+    watch: {},
+    created() {
 
-    methods: {
-      quitLogin() {
-        this.$store.dispatch('LogOut');
-        window.location.href = "https://www.easyapi.com/user/login";
-      },
-      jupmPage() {
-        window.location.href = "https://www.easyapi.com/launch"
-      },
-      tabTeamFn(id) {
-        this.$store.dispatch('switchoverTeam', id);
-      }
-    },
-    'watch': {
-      $route: function () {
-        if (this.$route.path.indexOf('/back/') < 0) {
-          this.inBack = false
-        } else {
-          this.inBack = true
-        }
-      }
     },
     mounted() {
-      this.$store.dispatch('GetUserInfo');
+      this.$store.dispatch('getUserInfo');
       this.$store.dispatch('getTeamList');
+      this.$store.dispatch('setNavbar', this.$route.matched[0].path);
+    },
+    //keep-alive 组件激活时调用
+    activated() {
+    },
+    //keep-alive 组件停用时调用。
+    deactivated() {
+    },
+    //方法
+    methods: {
+      createTeamPage() {
+        window.location.href = "https://www.easyapi.com/launch"
+      },
+      jumpPage(url) {
+        if (this.$route.path.indexOf(url) === -1) {
+          this.$router.push({path: url, query: {}});
+          this.$store.dispatch('setNavbar', url);
+        }
+      },
+      logOut() {
+        this.$router.push('/login')
+        this.$store.dispatch('logOut');
+        this.showPopover = false
+      }
     }
   }
-
 </script>
-
-<style lang="scss" scoped>
-	.header {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 50px;
-		line-height: 50px;
-		padding-left: 20px;
-		padding-right: 20px;
-		background-color: #1ac1d6;
-		font-weight: bold;
-		z-index: 888;
-
-		.a-item {
-			position: relative;
-			display: inline-block;
-			color: #fff;
-			padding: 0 20px;
-			line-height: 50px;
-			text-decoration: none;
-		}
-
-		.a-item:hover {
-			background: darken(#1ac1d6, 5%);
-		}
-	}
-
-	.serveName-box {
-		cursor: pointer;
-
-		a.serveName {
-			color: #fff;
-			line-height: 50px;
-			display: inline-block;
-
-			i {
-				margin-left: 5px;
-			}
-		}
-
-	}
-
-	.easyapi-logo {
-		height: 50px;
-	}
-
-	.userOperation-box {
+<style lang="scss">
+	.teamIcon {
 		display: inline-block;
-		height: 50px;
-		position: relative;
+		width: 35px;
+		height: 35px;
+		background: url("../../public/images/teamIcon.png") no-repeat;
+		background-size: cover;
+	}
 
-		.userAvatar {
-			display: inline-block;
-			vertical-align: top;
+	.teamServeInfo {
+		background-color: #ffffff;
+		border-top: none;
+		width: 410px;
 
-			& > a {
-				padding: 0 20px;
-				display: inline-block;
-				height: 50px;
-				cursor: pointer;
-				position: relative;
-
-				img {
-					width: 35px;
-					height: 35px;
-					border-radius: 50%;
-				}
-			}
-
-		}
-
-		.ea-DropdownMenu {
-			position: absolute;
-			top: 50px;
-			right: 0;
-			z-index: 100;
-			border: 1px solid #eee;
-			border-top: none;
-			box-shadow: 0px 1px 3px #ddd;
-			background-color: #fff;
-			border-bottom-right-radius: 5px;
-			border-bottom-left-radius: 5px;
-			width: 100px;
-			display: none;
-
-			&.active {
-				display: block;
-			}
-
-
-			a {
-				display: block;
-				line-height: 26px;
-				height: inherit;
-				padding-left: 15px;
-				color: #777;
-				font-weight: normal;
-
-				&:hover {
-					background-color: #1ac1d6;
-					color: #fff;
-				}
-
-
-			}
-
-		}
-
-		.teamServe {
+		.teamServeName {
 			height: 50px;
-			display: inline-block;
-			position: relative;
-
-			& > a {
-				padding: 7.5px 20px;
-				height: 50px;
-				display: inline-block;
-
-				&.active {
-					background-color: #19B7CB;
-				}
-
-				&:hover {
-					background-color: #19B7CB;
-				}
-
-				.teamIcon {
-					display: inline-block;
-					width: 35px;
-					height: 35px;
-					background: url("../../public/images/teamIcon.png") no-repeat;
-					background-size: cover;
-				}
-			}
-
-
+			line-height: 50px;
+			font-weight: bold;
+			border-bottom: 1px solid #eaeaea;
 		}
 
-		.teamServeInfo {
-			position :absolute;
-			top :50px;
-			right: 0;
-			background-color :#ffffff;
-			box-shadow: 0px 1px 3px #ddd;
-			border: 1px solid #eee;
-			border-top: none;
-			width :410px;
-			border-bottom-right-radius: 5px;
-			border-bottom-left-radius: 5px;
-			display :none;
 
-			&.active {
-				display: block;
-			}
-
-
-			.teamServeName {
-				height: 50px;
-				line-height: 50px;
-				font-weight: bold;
-				border-bottom: 1px solid #eaeaea;
-			}
-
-
-			.teamServeContent {
-				border-bottom: 1px solid #eaeaea;
-				height: 110px;
-				padding-top: 10px;
-				padding-bottom: 10px;
-			}
-
+		.teamServeContent {
+			border-bottom: 1px solid #eaeaea;
+			height: 110px;
+			padding-top: 10px;
+			padding-bottom: 10px;
 
 			.teamsServeImg {
 				width: 80px;
 				height: 80px;
 				border-radius: 50%;
-				margin-top: (10 / 2) px;
-
+				margin-top: (10/2) px;
 			}
 
 			.teamsServeImg-R {
@@ -320,8 +177,8 @@
 					height: 39px;
 					line-height: 39px;
 					font-size: 1rem;
-				}
 
+				}
 
 				.teamServeBtns {
 					height: 50px;
@@ -337,84 +194,100 @@
 						font-weight: normal;
 						font-size: 14px;
 					}
-
 				}
-
-
 			}
 
-			.switchTeam-box {
-				border-bottom: 1px solid #eaeaea;
-
-				& > h2 {
-					height: 50px;
-					line-height: 50px;
-					font-weight: bold;
-				}
+		}
 
 
-				.ea-TeamList-box {
-					/*父元素设置弹性布局*/
-					display: flex;
-					/*主轴方向*/
-					/*column 列上下*/
-					flex-direction: row;
-					/*是否换行*/
-					flex-wrap: wrap;
-					/*在主轴对齐方式*/
-					justify-content: flex-start;
+		.switchTeam-box {
+			border-bottom: 1px solid #eaeaea;
 
-					.ea-Team-item {
-						display: inline-block;
-						width: 50%;
-						color: #333;
-						font-size: 1rem;
-						font-weight: normal;
-						height: 40px;
-						line-height: 40px;
+			& > h2 {
+				height: 50px;
+				line-height: 50px;
+				font-weight: bold;
+			}
 
-						& > img {
-							width: 28px;
-							height: 28px;
-							border-radius: 50%;
-							vertical-align: middle;
-							margin-right: 6px;
-						}
+			.ea-TeamList-box {
+				/*父元素设置弹性布局*/
+				display: flex;
+				/*主轴方向*/
+				/*column 列上下*/
+				flex-direction: row;
+				/*是否换行*/
+				flex-wrap: wrap;
+				/*在主轴对齐方式*/
+				justify-content: flex-start;
 
+				.ea-Team-item {
+					display: inline-block;
+					width: 50%;
+					color: #333;
+					font-size: 1rem;
+					font-weight: normal;
+					height: 40px;
+					line-height: 40px;
 
-						& > span {
-							flex: 1;
-							vertical-align: middle;
-							overflow:hidden;
-							text-overflow:ellipsis;
-							white-space:nowrap;
-						}
-
+					& > img {
+						width: 28px;
+						height: 28px;
+						border-radius: 50%;
+						vertical-align: middle;
+						margin-right: 10px;
 					}
 
+					& > span {
+						vertical-align: middle;
+					}
 				}
 
-
 			}
+		}
 
-			.creatTeam {
-				text-align: center;
-			}
 
+		.creatTeam {
+			text-align: center;
+			padding-top: 12px;
 
 			.ea-info-btn {
 				background-color: #5BC0DE;
 			}
 
-
 			.ea-info-btn:hover {
 				background-color: #31B0D5;
+			}
+		}
+
+
+	}
+
+
+</style>
+<style scoped lang="scss">
+	.el-popover--box {
+		padding: 0;
+
+		div {
+			a {
+				cursor: pointer;
+				line-height: 26px;
+				padding: 0 15px;
+				color: #999999;
+
+				&:hover {
+					background: $main-color;
+					color: $cl-white;
+				}
 			}
 
 
 		}
 
 	}
-
-
+	.header_account{
+		a{
+			display: inline-block;
+		}
+	}
 </style>

@@ -1,8 +1,14 @@
 <template>
-	<div class="container flex-c">
-		<h2 class="set-title">意见反馈列表</h2>
-		<div class="set-content">
+	<div class="main-container">
+		<div class="main-breadcrumb flex-r">
+			<el-breadcrumb separator-class="el-icon-arrow-right">
+				<el-breadcrumb-item>意见反馈列表</el-breadcrumb-item>
+			</el-breadcrumb>
+		</div>
+		<div class="main-content">
 			<el-table
+				size="small"
+				header-row-class-name="table-header--gray"
 				:data="tableData"
 				v-loading="loading"
 				stripe
@@ -10,7 +16,8 @@
 				<el-table-column
 					label="编号"
 					type="index"
-					width="50">
+					width="50"
+					align="center">
 				</el-table-column>
 				<el-table-column
 					prop="addTime"
@@ -72,6 +79,8 @@
 			</div>
 		</div>
 	</div>
+
+
 </template>
 <script>
   import {feedbacksUrl, feedbackUrl} from '../../api/api'

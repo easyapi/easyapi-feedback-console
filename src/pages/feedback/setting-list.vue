@@ -1,11 +1,15 @@
 <template>
-	<div class="container flex-c">
-		<h2 class="set-title">意见反馈列表</h2>
-		<div class="set-content">
-			<div class="oper text-align-right">
-				<el-button size="small" type="primary" @click="jumpPage('/feedback/setting',1)">新增配置</el-button>
-			</div>
+	<div class="main-container">
+		<div class="main-breadcrumb flex-r">
+			<el-breadcrumb separator-class="el-icon-arrow-right">
+				<el-breadcrumb-item>意见反馈设置</el-breadcrumb-item>
+			</el-breadcrumb>
+			<el-button size="small" type="primary" @click="jumpPage('/feedback/setting',1)">新增配置</el-button>
+		</div>
+		<div class="main-content">
 			<el-table
+				size="small"
+				header-row-class-name="table-header--gray"
 				:data="tableData"
 				v-loading="loading"
 				stripe
@@ -25,7 +29,7 @@
 					prop="emails"
 					label="邮箱"
 					header-align="center"
-					>
+				>
 				</el-table-column>
 				<el-table-column
 					prop="mobiles"
@@ -65,6 +69,10 @@
 			</div>
 		</div>
 	</div>
+
+
+
+
 </template>
 <script>
   import {feedbackConfigsUrl,feedbackConfigUrl} from '../../api/api'
