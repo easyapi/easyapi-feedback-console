@@ -13,7 +13,7 @@ const store = new Vuex.Store({
   },
   //定义状态
   state: {
-    'serviceId': 6, //服务ID
+    'serviceId': 16, //服务ID
     'serviceName': "意见反馈" //服务名称
   },
   mutations: {},

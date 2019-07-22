@@ -29,10 +29,10 @@ const team = {
         url: getMyTeam,
         method: "get",
       }).then(res => {
-        // console.log(res.data)
+        // console.log(res)
         commit('SET_TEAMLIST',res.data.content)
       }).catch(error => {
-        console.log(error)
+        console.log(error.response)
       })
     },
     //切换团队

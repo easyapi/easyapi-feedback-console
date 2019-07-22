@@ -2,6 +2,9 @@
 	<div class="container flex-c">
 		<h2 class="set-title">意见反馈列表</h2>
 		<div class="set-content">
+			<div class="oper text-align-right">
+				<el-button size="small" type="primary" @click="jumpPage('/feedback/setting',1)">新增配置</el-button>
+			</div>
 			<el-table
 				:data="tableData"
 				v-loading="loading"
@@ -14,47 +17,37 @@
 				</el-table-column>
 				<el-table-column
 					prop="addTime"
-					label="反馈时间"
+					label="添加时间"
 					width="180"
 					align="center">
 				</el-table-column>
 				<el-table-column
-					prop="linkman"
-					label="姓名"
+					prop="emails"
+					label="邮箱"
+					header-align="center"
+					>
+				</el-table-column>
+				<el-table-column
+					prop="mobiles"
+					label="手机号码"
+					header-align="center"
+				>
+				</el-table-column>
+				<el-table-column
+					prop="theme"
+					label="主题"
 					width="180"
 					align="center">
 				</el-table-column>
-				<el-table-column
-					prop="contact"
-					label="联系方式"
-					width="180"
-					align="center">
-				</el-table-column>
-				<el-table-column
-					prop="content"
-					label="反馈内容"
-					header-align="center">
-				</el-table-column>
-				<el-table-column
 
-					label="状态"
-					width="180"
-					align="center">
-					<template v-slot="scope">
-						<div v-if="scope.row.ifReply">已回复</div>
-						<div class="cl-red">未回复</div>
-
-					</template>
-				</el-table-column>
 				<el-table-column
 					prop="name"
 					label="操作"
 					width="180"
 					align="center">
 					<template v-slot="scope">
-						<el-button size="mini" @click="jumpPage('/feedback/detail',scope.row.feedbackId)" type="primary">详情
-						</el-button>
-						<el-button size="mini" @click="delFeedback(scope.row.feedbackId)" type="danger">删除</el-button>
+						<el-button size="mini" @click="jumpPage('/feedback/setting',0,scope.row.feedbackConfigId)" type="primary">编辑</el-button>
+						<el-button size="mini" @click="delFeedbackConfig(scope.row.feedbackConfigId)" type="danger">删除</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -74,7 +67,7 @@
 	</div>
 </template>
 <script>
-  import {feedbacksUrl, feedbackUrl} from '../../api/api'
+  import {feedbackConfigsUrl,feedbackConfigUrl} from '../../api/api'
 
   export default {
     name: '',
@@ -96,7 +89,7 @@
 
     },
     mounted() {
-      this.getFeedbackList()
+      this.getFeedbackConfigs()
     },
     //keep-alive 组件激活时调用
     activated() {
@@ -106,7 +99,7 @@
     },
     //方法
     methods: {
-      getFeedbackList() {
+      getFeedbackConfigs() {
         this.loading = true;
         let obj = {}
         obj.page = this.current - 1;
@@ -114,7 +107,7 @@
 
         this.$ajax({
           method: "get",
-          url: feedbacksUrl,
+          url: feedbackConfigsUrl,
           params: obj
         }).then(res => {
           // console.log(res)
@@ -131,18 +124,17 @@
           console.log(error);
         });
       },
-      delFeedback(e) {
-        this.$confirm('您确定要删除该反馈内容吗？')
+      delFeedbackConfig(e) {
+        this.$confirm('您确定要删除该配置吗？')
           .then(_ => {
             this.$ajax({
               method: 'delete',
-              url: feedbackUrl + '/' + e,
+              url: feedbackConfigUrl + '/' + e,
             }).then(res => {
               console.log(res)
-              this.$message.success(res.data.message);
               if (res.data.code === 1) {
-
-                this.getFeedbackList();
+            this.$message.success("删除成功");
+                this.getFeedbackConfigs();
               }
 
             }).catch(error => {
@@ -152,24 +144,23 @@
           .catch(_ => {
           });
       },
-      jumpPage(url, v) {
-        this.$router.push({
-          path: url, query: {id: v}
-        })
-      },
+
       handleSizeChange(val) {
         this.pageSize = val;
-        this.getFeedbackList();
+        this.getFeedbackConfigs();
       },
       handleCurrentChange(val) {
         this.current = val;
-        this.getFeedbackList();
+        this.getFeedbackConfigs();
       },
+      jumpPage(url,t,v){
+        this.$router.push({path:url, query:{type:t, val:v}})
+      }
     }
   }
 </script>
 <style scoped lang="scss">
-	.cl-red {
-		color: #e4393c;
+	.oper {
+		margin-bottom: 20px;
 	}
 </style>
