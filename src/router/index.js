@@ -25,22 +25,22 @@ export default new Router({
         },
         {
           path: 'detail',
-          name: 'FeedbackList',
+          name: 'FeedbackListDetail',
           component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/detail.vue')
         },
-        {
-          path: 'template',
-          name: 'FeedbackTemplate',
-          component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/template.vue')
-        },
-        {
-          path: 'setting-list',
-          name: 'FeedbackSettingList',
-          component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/setting-list.vue')
-        },
+        // {
+        //   path: 'template',
+        //   name: 'FeedbackTemplate',
+        //   component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/template.vue')
+        // },
+        // {
+        //   path: 'setting-list',
+        //   name: 'FeedbackSettingList',
+        //   component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/setting-list.vue')
+        // },
         {
           path: 'setting',
-          name: 'FeedbackSettingList',
+          name: 'FeedbackSetting',
           component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/setting.vue')
         },
       ]
