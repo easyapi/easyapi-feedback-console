@@ -12,7 +12,7 @@ axios.interceptors.request.use(function (config) {
   //部署注销↓-----
   // Cookies.set('authenticationToken', "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoeWZAYmFuZ3F1LmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE1NjUyNjg2NzV9.S1lGzJ-W0qJBtDWN_XL8jdw4vhTBKpZnh7woZCYvt7TQrNiUMlOaAEg27lTEnlpPqVLf3NIHu4B18aFEJx3AQQ")
   //部署注销↑-----
-  let token = Cookies.get('authenticationToken')
+  // let token = Cookies.get('authenticationToken')
 
   //全局加Token
   console.log(token)

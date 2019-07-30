@@ -1,10 +1,12 @@
 <template>
 	<div class="header flex-r">
 		<div class="header_logo flex-r">
-			<img src="../assets/images/logo.png" alt="">
-			<span class="fz-14">
-				意见反馈
-			</span>
+			<a href="https://www.easyapi.com/" target="_blank">
+				<img src="../assets/images/logo.png" alt="">
+			</a>
+			<a href="https://market2.easyapi.com/service/center" target="_blank" class="fz-14">
+				API服务中心
+			</a>
 		</div>
 		<div class="header_navbar flex-r">
 			<a v-for="(item,index) in pagesList" :class="[navBarActive===item.name?'active':'']" :key="index"
