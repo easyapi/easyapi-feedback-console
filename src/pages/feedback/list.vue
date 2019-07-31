@@ -2,7 +2,7 @@
 	<div class="main-container">
 		<div class="main-breadcrumb flex-r">
 			<el-breadcrumb separator-class="el-icon-arrow-right">
-				<el-breadcrumb-item>意见反馈列表</el-breadcrumb-item>
+				<el-breadcrumb-item>反馈列表</el-breadcrumb-item>
 			</el-breadcrumb>
 		</div>
 		<div class="main-content">
@@ -120,6 +120,7 @@
         let obj = {}
         obj.page = this.current - 1;
         obj.size = this.pageSize;
+				obj.sort ='addTime,desc'
 
         this.$ajax({
           method: "get",

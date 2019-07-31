@@ -34,7 +34,7 @@
 						<h2 class="lrPading-20">切换团队：</h2>
 						<div class="ea-TeamList-box lrPading-20">
 							<a class="ea-Team-item" v-for="(item,index) in teamList" v-bind:key="index"
-							   @click="tabTeamFn(item.team.teamId)">
+							   @click="tabTeamFn(item.team.id)">
 								<img :src="item.team.img+'!icon.jpg'" alt="">
 								<span>{{item.team.name}}</span>
 
@@ -124,6 +124,10 @@
           this.$router.push({path: url, query: {}});
           this.$store.dispatch('setNavbar', url);
         }
+      },
+      async tabTeamFn(id){
+        await this.$store.dispatch('switchoverTeam',id);
+
       },
       logOut() {
         this.$router.push('/login')
@@ -287,8 +291,9 @@
 		}
 
 	}
-	.header_account{
-		a{
+
+	.header_account {
+		a {
 			display: inline-block;
 		}
 	}

@@ -18,13 +18,13 @@ let list = [
         title: '意见反馈',
         sons: [
           {
-            title: "意见反馈列表",
+            title: "反馈列表",
             url: '/feedback/list',
             name: 'FeedbackList',
             icon: "",
           },
           {
-            title: "意见反馈设置",
+            title: "反馈设置",
             url: '/feedback/setting',
             name: 'FeedbackSetting',
             icon: "",

@@ -44,6 +44,7 @@ const team = {
         console.log(res)
         if (res.data.code===1){
           dispatch('getUserInfo')
+          location.reload();
         }
       }).catch(error =>{
         console.log(error)

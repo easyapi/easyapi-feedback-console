@@ -4,7 +4,7 @@
 			<el-breadcrumb separator-class="el-icon-arrow-right">
 				<!--<el-breadcrumb-item to="/feedback/setting-list">意见反馈设置</el-breadcrumb-item>-->
 				<!--<el-breadcrumb-item>{{title}}</el-breadcrumb-item>-->
-				<el-breadcrumb-item>意见反馈设置</el-breadcrumb-item>
+				<el-breadcrumb-item>反馈设置</el-breadcrumb-item>
 			</el-breadcrumb>
 		</div>
 		<div class="main-content">
