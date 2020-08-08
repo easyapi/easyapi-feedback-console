@@ -9,39 +9,24 @@ export default new Router({
   base: '/console/',
   routes: [
     {
-      path: '/',
-      redirect: '/feedback'
+      path: "/",
+      redirect: "/base"
     },
     {
-      path: '/feedback',
-      name: 'Feedback',
-      component: () => import(/* webpackChunkName: "feedback" */ '../pages/layout/layout.vue'),
-      redirect: '/feedback/list',
+      path: '/base',
+      name: 'base',
+      component: () => import('../pages/layout/layout.vue'),
+      redirect: '/base/posterTemplate',
       children: [
         {
-          path: 'list',
-          name: 'FeedbackList',
-          component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/list.vue')
+          path: 'posterRecord',
+          name: 'posterRecord',
+          component: () => import('../pages/base/posterRecord.vue')
         },
         {
-          path: 'detail',
-          name: 'FeedbackListDetail',
-          component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/detail.vue')
-        },
-        // {
-        //   path: 'template',
-        //   name: 'FeedbackTemplate',
-        //   component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/template.vue')
-        // },
-        // {
-        //   path: 'setting-list',
-        //   name: 'FeedbackSettingList',
-        //   component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/setting-list.vue')
-        // },
-        {
-          path: 'setting',
-          name: 'FeedbackSetting',
-          component: () => import(/* webpackChunkName: "feedback" */ '../pages/feedback/setting.vue')
+          path: 'posterTemplate',
+          name: 'posterTemplate',
+          component: () => import('../pages/base/posterTemplate.vue')
         },
       ]
     },

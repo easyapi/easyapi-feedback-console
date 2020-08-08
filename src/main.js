@@ -28,15 +28,6 @@ import './assets/styles/element-variables.scss'
 Vue.use(ElementUI)
 
 
-// router.beforeEach((to, from, next) => {
-//   NProgress.start();
-//   next()
-// })
-//
-// router.afterEach(transition => {
-//   NProgress.done();
-// });
-
 
 new Vue({
   router,
