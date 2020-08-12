@@ -10,25 +10,25 @@ import Cookies from 'js-cookie';
 * */
 let list = [
   {
-    title: "二维码海报",
-    url: '/base',
-    name: 'base',
+    title: "意见反馈",
+    url: '/feedback',
+    name: 'Feedback',
     sons: [
       {
-        title: '二维码海报',
+        title: '意见反馈',
         sons: [
           {
-            title: "海报记录",
-            url: '/base/posterRecord',
-            name: 'posterRecord',
+            title: "反馈列表",
+            url: '/feedback/list',
+            name: 'FeedbackList',
             icon: "",
           },
           {
-            title: "海报模板",
-            url: '/base/posterTemplate',
-            name: 'posterTemplate',
+            title: "反馈设置",
+            url: '/feedback/setting',
+            name: 'FeedbackSetting',
             icon: "",
-          },          
+          },
         ]
       },
     ]
@@ -40,12 +40,12 @@ let list = [
 let extend = [
   //商城
   {
-    name: 'posterRecord',
-    list: ['/base/posterRecord']
+    name: 'FeedbackList',
+    list: ['/feedback/list','/feedback/detail']
   },
   {
-    name: 'posterTemplate',
-    list: ['/base/posterTemplate']
+    name: 'FeedbackSetting',
+    list: ['/feedback/setting']
   },
 ];
 
