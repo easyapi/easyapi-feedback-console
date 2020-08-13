@@ -2,11 +2,13 @@
 	<div class="header flex-r">
 		<div class="header_logo flex-r">
 			<a href="https://www.easyapi.com/" target="_blank">
-				<img src="../assets/images/logo.png" alt="">
+				<div class="ea-header-item logo">
+					<img src="../assets/images/logo.png" alt="">
+				</div>
 			</a>
-			<a href="https://market2.easyapi.com/service/center" target="_blank" class="fz-14">
-				API服务中心
-			</a>
+			<div class="">
+				<a href="https://service.easyapi.com/" target="_blank" class="fz-14  logo-item ea-header-item">API服务中心</a>
+			</div>
 		</div>
 		<div class="header_navbar flex-r">
 			<a v-for="(item,index) in pagesList" :class="[navBarActive===item.name?'active':'']" :key="index"
@@ -296,5 +298,29 @@
 		a {
 			display: inline-block;
 		}
+	}
+	.ea-header-item {
+		position: relative;
+		float: left;
+		height: 50px;
+		padding: 0 30px;
+		color: #fff;
+		border-right: 1px solid darken(#1ac1d6, 5%);
+		font-size: 14px;
+	  }
+	.logo {
+	padding-left: 0;
+		img {
+			margin: 10px 0;
+			height: 30px;
+			width: 30px;
+		}
+	}
+	.logo-item{
+		line-height: 50px;
+		font-weight: bold;
+		// padding-right: 28px;
+		margin-right: -20px;
+		font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif !important
 	}
 </style>
