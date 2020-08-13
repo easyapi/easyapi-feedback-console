@@ -117,7 +117,7 @@
           method: 'get',
           url: feedbackUrl+'/'+this.feedbackId,
         }).then(res=>{
-	        if (res.data.code==="1"){
+	        if (res.data.code=== 1){
 	          this.feedbackDetail=res.data.content;
 	        }
         }).catch(error =>{
