@@ -22,19 +22,19 @@
 				<el-table-column
 					prop="addTime"
 					label="反馈时间"
-					width="180"
+					width="140"
 					align="center">
 				</el-table-column>
 				<el-table-column
 					prop="linkman"
 					label="姓名"
-					width="180"
+					width="100"
 					align="center">
 				</el-table-column>
 				<el-table-column
 					prop="contact"
 					label="联系方式"
-					width="180"
+					width="100"
 					align="center">
 				</el-table-column>
 				<el-table-column
@@ -43,9 +43,8 @@
 					header-align="center">
 				</el-table-column>
 				<el-table-column
-
 					label="状态"
-					width="180"
+					width="70"
 					align="center">
 					<template v-slot="scope">
 						<div v-if="scope.row.ifReply">已回复</div>
@@ -56,7 +55,7 @@
 				<el-table-column
 					prop="name"
 					label="操作"
-					width="180"
+					width="150"
 					align="center">
 					<template v-slot="scope">
 						<el-button size="mini" @click="jumpPage('/feedback/detail',scope.row.feedbackId)" type="primary">详情
